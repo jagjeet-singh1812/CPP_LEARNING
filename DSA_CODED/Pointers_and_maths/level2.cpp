@@ -25,14 +25,32 @@ cout<<"value at "<<i+1<<" th block in the array is "<<*(arr+i)<<endl;
     for(int i=0;i<10;i++){
         cout<<i[arr]<<endl;
     }
+    cout<<arr+2<<endl;
 }
 
 void char_array(){
 char ch[10]="jagjeet";
 char * k=ch;
 cout<<ch<<endl;//prints whole char array
-cout<<&ch<<endl;
+cout<<&ch<<endl;//adress of first char
+cout<<&ch[0]<<endl;//prints whole char array
 cout<<k<<endl;//print the whole char array
+cout<<*k<<endl;// first char as *(k+0)
+cout<<&k<<endl;// address of the pointer
+cout<<k+2<<endl;//2 nd index to last string printed
+cout<<ch+2<<endl;//2 nd index to last string printed 
+//this is not possible as in array as cant make changes in symbol table
+//  cout<<ch<<endl;
+//     ch=ch+2;
+//  cout<<ch<<endl;
+
+char temp='k';
+char * kk=&temp;
+cout<<kk<<endl;// will print some garbage after it till we get null charachter
+
+
+char *j="jagjeet";// bad practice as only storage in temporary storage while in case of char array this happens then will store in address allocated to the char array
+cout<<j<<endl;
 }
 
 int main()
