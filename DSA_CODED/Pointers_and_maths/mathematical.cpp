@@ -88,6 +88,24 @@ int countPrimes(int x) {
     return count_primes;
     }
 
+
+
+vector<bool>optimized_seives(ll n){
+vector<bool>seive(n+1,true);
+seive[0]=seive[1]=false;
+for(ll i=2;i*i<=n;i++){
+if(seive[i]){
+    ll j=i*i;
+    // int j=i*2 as from 2 to i-1 are already marked by others
+    while(j<=n){
+        seive[i]=false;
+        j+=i;
+    }
+}
+}
+return seive;
+}
+
 void naive_prime_count(ll n)
 {
     int c = 0;

@@ -1,115 +1,65 @@
 #include<bits/stdc++.h>
-#define ll long long
 using namespace std;
-void simpleSieve(int limit, vector<int> &prime)
-{
-    // Create a boolean array "mark[0..n-1]" and initialize
-    // all entries of it as true. A value in mark[p] will
-    // finally be false if 'p' is Not a prime, else true.
-    vector<bool> mark(limit + 1, true);
- 
-    for (int p=2; p*p<limit; p++)
-    {
-        // If p is not changed, then it is a prime
-        if (mark[p] == true)
-        {
-            // Update all multiples of p
-            for (int i=p*p; i<limit; i+=p)
-                mark[i] = false;
+vector<bool>Sieve(long long n){
+    // Create a sieve
+    vector<bool>sieve(n+1,true); // Mark every number as prime initially
+    sieve[0] = sieve[1] = false; // As 0 and 1 are not prime
+    // Optimization - 2 => Changing the outer for loop
+    for(long long i = 2;i<=sqrt(n);i++){ // 2 will be the first prime number
+        if(sieve[i] == true){ 
+            // long long j = i*2; 
+            // Optimization - 1
+            long long j = i * i;
+            while(j<=n){
+                sieve[j] = false; // Mark multiples of prime number as non prime
+                j  += i;
+            }
         }
     }
- 
-    // Print all prime numbers and store them in prime
-    for (int p=2; p<limit; p++)
-    {
-        if (mark[p] == true)
-        {
-            prime.push_back(p);
-            cout << p << " ";
-        }
-    }
+    return sieve;
 }
-// variation odf seive itself just high to low range 
-
-
-void segmentedSieve(int n)
-{
-    // Compute all primes smaller than or equal
-    // to square root of n using simple sieve
-    int limit = floor(sqrt(n))+1;
-    vector<int> prime;
-    prime.reserve(limit);
-    simpleSieve(limit, prime);
- 
-    // Divide the range [0..n-1] in different segments
-    // We have chosen segment size as sqrt(n).
-    int low = limit;
-    int high = 2*limit;
- 
-    // While all segments of range [0..n-1] are not processed,
-    // process one segment at a time
-    while (low < n)
-    {
-        if (high >= n)
-           high = n;
-         
-        // To mark primes in current range. A value in mark[i]
-        // will finally be false if 'i-low' is Not a prime,
-        // else true.
-        bool mark[limit+1];
-        memset(mark, true, sizeof(mark));
- 
-        // Use the found primes by simpleSieve() to find
-        // primes in current range
-        for (int i = 0; i < prime.size(); i++)
-        {
-            // Find the minimum number in [low..high] that is
-            // a multiple of prime[i] (divisible by prime[i])
-            // For example, if low is 31 and prime[i] is 3,
-            // we start with 33.
-            int loLim = floor(low/prime[i]) * prime[i];
-            if (loLim < low)
-                loLim += prime[i];
- 
-            /* Mark multiples of prime[i] in [low..high]:
-                We are marking j - low for j, i.e. each number
-                in range [low, high] is mapped to [0, high-low]
-                so if range is [50, 100] marking 50 corresponds
-                to marking 0, marking 51 corresponds to 1 and
-                so on. In this way we need to allocate space only
-                for range */
-            for (int j=loLim; j<high; j+=prime[i])
-                mark[j-low] = false;
+vector<bool>segSieve(long long L,long long R){
+    // Using prime array to mark segmented sieve
+    vector<bool>sieve = Sieve(sqrt(R));
+    vector<long long>basePrimes;
+    // Step - 2
+    for(long long i = 0;i<sieve.size();i++){
+        if(sieve[i]  == true){
+            // It is prime so push back in base primes
+            basePrimes.push_back(i);
         }
- 
-        // Numbers which are not marked as false are prime
-        for (int i = low; i<high; i++)
-            if (mark[i - low] == true)
-                cout << i << " ";
- 
-        // Update low and high for next segment
-        low = low + limit;
-        high = high + limit;
     }
+    // Step - 1
+    // for(auto k:basePrimes) cout<<k<<" ";
+    cout<<endl;
+    vector<bool>segSieve(R-L+1,true);
+    // Base Condition
+    if(L == 1 || L == 0){
+        segSieve[L] = false;
+    }
+    // Step - 3
+    for(auto prime:basePrimes){
+        long long first_mul = (L/prime) * prime;
+        if(first_mul < L){
+            first_mul = first_mul + prime;
+        }
+        long long j = max(first_mul,prime*prime); // Might be case that first_mul may be marked already
+        // Exactly same loop as normal sieve
+        while(j<=R){
+            segSieve[j - L] = false; // Resemblance thing as 0th index is mapped to 110
+            j = j + prime;
+        }
+    }
+    return segSieve;
 }
-int main()
-{
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-
-    cout.tie(NULL);
-#ifndef ONLINE_JUDGE
-    freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
-    freopen("error.txt", "w", stderr);
-
-#endif
-    int t;
-    cin>>t;
-
-    while(t-- >0)
-    {
-        
+int main(){
+    long long L,R;
+  cin>>L>>R;
+    vector<bool>segmentedSieve = segSieve(L,R);
+    for(long long i = 0;i<segmentedSieve.size();i++){
+        if(segmentedSieve[i]){
+            cout<<i+L<<" ";
+        }
     }
-    return 0;
+return 0;
 }
