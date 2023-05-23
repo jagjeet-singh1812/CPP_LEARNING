@@ -1,18 +1,19 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-    int find_sqrt(int key)
+
+    int find_sqrt(int n)
     {
         int low = 0;
-        int high = key;
+        int high = n;
         int ans;
         while (low <= high)
 
         {
             long long int mid = low + (high - low) / 2; // to avoid overflow
-            if (mid * mid == key)
+            if (mid * mid == n)
                 return mid;
-            else if (key < mid * mid)
+            else if (n < mid * mid)
             {
                 high = mid - 1;
             }
@@ -22,7 +23,7 @@ using namespace std;
                 low = mid + 1;
             }
         }
-        return ans;
+        return ans;// if comment this out then intresting result will be seen refer overstackflow for explaination
     }
     int main()
     {
@@ -30,7 +31,7 @@ using namespace std;
         cin>>x;
         int ans = find_sqrt(x);
         int precision;
-        cout << "enter digit upto precision you want" << endl;
+        cout << "Enter digit upto precision you want" << endl;
         cin >> precision;
         double final_ans=ans;
         double step=0.1;
