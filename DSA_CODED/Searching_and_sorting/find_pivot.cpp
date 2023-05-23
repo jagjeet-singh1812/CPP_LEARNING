@@ -16,9 +16,9 @@ int search(vector<int>a, int l, int h)
             return mid;
         if (a[mid] < a[mid - 1] and mid-1>=0)
             return mid - 1;
-        if (a[mid] <= a[l])
+        if (a[mid] <a[l] && mid>0)
         {//left search
-            h = mid - 1;
+            h = mid-1 ;
         }
         else
         {
@@ -27,7 +27,7 @@ int search(vector<int>a, int l, int h)
         }
         mid = l + (h - l) / 2;
     }
-    return -1;
+    return l;
 }
 
     int main()
@@ -45,10 +45,10 @@ int search(vector<int>a, int l, int h)
         int t;
         // cin>>t;
         t = 1;
-        vector<int>v {7,1, 2, 3, 4};
+        vector<int>v {1,3};
         while (t-- > 0)
         {
-            int ans = search(v, 0, 5);
+            int ans = search(v, 0, v.size()-1);
             cout<<"pivot index found at: "<<ans<<endl;// ans is 0 index
         }
         return 0;
