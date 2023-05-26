@@ -1,4 +1,4 @@
-//also know as doubling search galloping/stazile/search
+//also know as doubling / galloping/stazile search
 #include<bits/stdc++.h>
 #define ll long long
 using namespace std;
