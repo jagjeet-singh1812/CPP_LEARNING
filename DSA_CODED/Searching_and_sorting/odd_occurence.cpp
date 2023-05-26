@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 #define ll long long
 using namespace std;
-//  secod way is xor of whole array --O(n)approach
 int search(vector<int> v)
 {
     int s = 0;
