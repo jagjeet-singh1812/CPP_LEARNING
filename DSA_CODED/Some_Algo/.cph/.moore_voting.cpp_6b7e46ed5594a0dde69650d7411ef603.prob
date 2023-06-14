@@ -1,0 +1,1 @@
+{"name":"Local: moore_voting","url":"d:\\GitHub\\CPP_LEARNING\\DSA_CODED\\Some_Algo\\moore_voting.cpp","tests":[{"id":1685306422861,"input":"11\n1 2 2 2 1 1 2 2 2 1 1","output":"2"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\GitHub\\CPP_LEARNING\\DSA_CODED\\Some_Algo\\moore_voting.cpp","group":"local","local":true}

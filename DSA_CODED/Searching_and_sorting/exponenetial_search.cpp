@@ -31,17 +31,17 @@ int binary_search_my(vector<int> &v, int low, int high, int key)
     }
     return -1;
 }
-
+//optimized binary_search
 int exponential_search(vector<int>&arr,int key){
     if(arr[0]==key){
         return 0;
     }
     int i=1;
     int n=arr.size()-1;
-    while(arr[i]<=key){
+    while(arr[i]<=key and i<n){//==>O(log m) where m is where till i goes 
         i=i<<1;
     }
-    return binary_search_my(arr,i/2,min(i,n-1),key);
+    return binary_search_my(arr,i/2,min(i,n-1),key);//O(log(2 ^(log m-1)))
 }
 
 int exponential_search_infinite_array(vector<int>&arr,int key){
@@ -82,7 +82,8 @@ int main()
 
 #endif
     int t;
-    cin>>t;
+    // cin>>t;
+    t=1;
 
     while(t-- >0)
     {
