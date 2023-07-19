@@ -3,6 +3,7 @@
 using namespace std;
 
 class Solution 
+
 {
     public:
     bool isPossible(int A[],int n,int m,int mid){

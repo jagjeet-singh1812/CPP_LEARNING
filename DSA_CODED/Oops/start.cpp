@@ -174,3 +174,28 @@ delete h;// manually delete for dynamic alloc
 //desctructor to empty
 //if static then auto matically done
 //else in dynmic need to do it manually
+
+
+// hw
+// const keyword-->Whenever const keyword is attached with any method(), variable, pointer variable, and with the object of a class it prevents that specific object/method()/variable to modify its data items value.
+
+
+//static variable 
+// void demo() //ouput is 0 1 2 3 4 
+// {
+//     // static variable
+//     static int count = 0;
+//     cout << count << " ";
+ 
+//     // value is updated and
+//     // will be carried to next
+//     // function calls
+//     count++;
+// }
+// int main()
+// {
+//     for (int i = 0; i < 5; i++)
+//         demo();
+//     return 0;
+// }
+ 
